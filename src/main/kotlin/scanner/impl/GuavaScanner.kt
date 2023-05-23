@@ -13,7 +13,7 @@ class GuavaScanner(val external: Class<*>, val excludeInternal: Boolean = true) 
             .allClasses
             .stream()
             .filter { it.packageName.startsWith(domain) }
-            .filter { excludeInternal && !it.packageName.startsWith(internal) }
+            .filter { !excludeInternal || !it.packageName.startsWith(internal) }
             .map { it.load() }
             .toList()
     }
